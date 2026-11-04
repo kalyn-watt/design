@@ -1073,7 +1073,7 @@ footer.site-footer {
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .landing-detail {
@@ -4668,4 +4668,73 @@ footer.site-footer {
 .landing-link:focus-visible {
   background: #000000;
   color: #ffffff;
+}
+
+/* About page layout */
+.about-main {
+  gap: 0;
+  padding-bottom: 96px;
+}
+
+.about-first {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  min-height: calc(100svh - 111px - 24px);
+  padding-bottom: 24px;
+}
+
+.about-top {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.about-cue {
+  align-self: center;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.about-cue:hover,
+.about-cue:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.about-more-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: max(480px, 78svh);
+  scroll-margin-top: 111px;
+}
+
+.about-story {
+  width: 610px;
+  max-width: 100%;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 25px;
+  text-align: justify;
+}
+
+@media (max-width: 860px) {
+  .about-first {
+    min-height: 0;
+    padding-bottom: 48px;
+  }
+
+  .about-cue {
+    align-self: flex-start;
+  }
+
+  .about-more-section {
+    min-height: 0;
+    padding: 24px 0 48px;
+  }
 }
