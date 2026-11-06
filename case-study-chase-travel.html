@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=183">
+  <link rel="stylesheet" href="style.css?v=192">
 </head>
 <body class="page-landing">
 
@@ -98,7 +98,7 @@
 
           <div class="ct-block">
             <p class="ct-label">CONTEXT / MY ROLE</p>
-            <h2 class="ct-heading">I delivered high-lift enhancements to the current LLM-powered search experience.</h2>
+            <h2 class="ct-heading">I delivered low-lift, high-impact enhancements to the current LLM-powered search experience.</h2>
             <p class="ct-body">As a designer under the Chase Travel AI team, I worked cross-functionally to give our search experience a refresh. These enhancements focused on guiding the customer in natural-language searching and better communicating result relevance.</p>
           </div>
         </div>
@@ -260,9 +260,16 @@
         playActive();
       }
 
-      steps.forEach(function (s, n) { s.addEventListener("click", function () { show(n); }); });
-      prev.addEventListener("click", function () { show(current - 1); });
-      next.addEventListener("click", function () { show(current + 1); });
+      /* stacked (mobile) layout: bring the step's text and video into view */
+      function revealPanel() {
+        if (panel && window.matchMedia("(max-width: 860px)").matches) {
+          panel.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        }
+      }
+
+      steps.forEach(function (s, n) { s.addEventListener("click", function () { show(n); revealPanel(); }); });
+      prev.addEventListener("click", function () { show(current - 1); revealPanel(); });
+      next.addEventListener("click", function () { show(current + 1); revealPanel(); });
       if (panel && "IntersectionObserver" in window) {
         new IntersectionObserver(function (entries) {
           inView = entries[0].isIntersecting;
@@ -295,5 +302,21 @@
       window.addEventListener("resize", update);
     })();
   </script>
+  <script src="case-nav.js"></script>
+  <footer class="kw-footer">
+    <div class="kw-footer-top">
+      <div class="kw-footer-col">
+        <p>Kalyn Watt</p>
+        <p class="kw-footer-note">Made with fan noise 10 hours playing in the background</p>
+      </div>
+      <div class="kw-footer-col">
+        <p>Connect with me!</p>
+        <a href="https://www.linkedin.com/in/kalyn-watt/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/kalynwatt/" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:kalynwatt123@gmail.com">Email</a>
+      </div>
+    </div>
+    <p class="kw-footer-wordmark" aria-hidden="true">Kalyn Watt</p>
+  </footer>
 </body>
 </html>
