@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=192">
+  <link rel="stylesheet" href="style.css?v=196">
 </head>
 <body class="page-landing">
 
@@ -35,7 +35,7 @@
         </a>
     </div>
 
-    <p class="play-intro">Delightful and introspective. <span class="play-swap"><span class="play-swap-a">Journal.</span><span class="play-swap-b">Where ideas are written.</span></span> <span class="play-swap"><span class="play-swap-a">Playground.</span><span class="play-swap-b">Where ideas are tinkered with.</span></span> <span class="play-swap"><span class="play-swap-a">Tomb.</span><span class="play-swap-b">Where ideas go to die... and come back to life.</span></span> The big house.</p>
+    <p class="play-intro">Delightful and introspective. <span class="play-swap"><span class="play-swap-a">Journal.</span><span class="play-swap-b">Where ideas are written.</span></span> <span class="play-swap"><span class="play-swap-a">Playground.</span><span class="play-swap-b">Where ideas are tinkered with.</span></span> <span class="play-swap"><span class="play-swap-a">Tomb.</span><span class="play-swap-b">Where ideas go to die... and come back to life.</span></span> <span class="play-house">The big house.</span></p>
 
     <div class="play-list">
       <section class="play-month">
@@ -129,18 +129,33 @@
       bindThumb(document.querySelector("[data-thumb-video]"), document.querySelector(".play-thumb:not(.play-thumb--image)"));
       bindThumb(document.querySelector("[data-thumb-image]"), document.querySelector(".play-thumb--image"));
       bindThumb(document.querySelector("[data-thumb-emoji]"), document.querySelector(".play-emoji"));
+      bindThumb(document.querySelector(".play-house"), document.querySelector(".play-emoji"));
     })();
   </script>
   <script>
     (function () {
       var swaps = document.querySelectorAll(".play-swap");
+      var intro = document.querySelector(".play-intro");
+      /* Animate the width only when the longer phrase fits on the same line. Otherwise
+         the hovered word would wrap away from the cursor and the hover would flicker off,
+         so the phrase just replaces the word in place and wraps naturally. */
       function measure() {
-        swaps.forEach(function (el) {
+        swaps.forEach(function (el) { el.classList.remove("is-smooth"); });
+        var box = intro.getBoundingClientRect();
+        var info = Array.prototype.map.call(swaps, function (el) {
           var a = el.querySelector(".play-swap-a");
           var b = el.querySelector(".play-swap-b");
-          el.classList.add("is-smooth");
-          el.style.setProperty("--swap-a", a.getBoundingClientRect().width + "px");
-          el.style.setProperty("--swap-b", b.getBoundingClientRect().width + "px");
+          var wasHidden = getComputedStyle(b).display === "none";
+          if (wasHidden) { b.style.display = "inline-block"; b.style.whiteSpace = "nowrap"; b.style.position = "absolute"; b.style.visibility = "hidden"; }
+          var widthB = b.getBoundingClientRect().width;
+          if (wasHidden) { b.removeAttribute("style"); }
+          return { el: el, left: el.getBoundingClientRect().left - box.left, widthA: a.getBoundingClientRect().width, widthB: widthB };
+        });
+        info.forEach(function (i) {
+          if (i.left + i.widthB > box.width) return;
+          i.el.style.setProperty("--swap-a", i.widthA + "px");
+          i.el.style.setProperty("--swap-b", i.widthB + "px");
+          i.el.classList.add("is-smooth");
         });
       }
       measure();
@@ -152,7 +167,7 @@
     <div class="kw-footer-top">
       <div class="kw-footer-col">
         <p>Kalyn Watt</p>
-        <p class="kw-footer-note">Made with fan noise 10 hours playing in the background</p>
+        <p class="kw-footer-note">Built with Claude Code and fan noise 10 hours playing in the background.</p>
       </div>
       <div class="kw-footer-col">
         <p>Connect with me!</p>

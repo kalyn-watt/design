@@ -1841,7 +1841,8 @@ footer.site-footer {
   .play-entry[data-thumb-image],
   .play-entry[data-thumb-image] a,
   .play-entry[data-thumb-emoji],
-  .play-entry[data-thumb-emoji] a {
+  .play-entry[data-thumb-emoji] a,
+  .play-house {
     cursor: none;
   }
 }
@@ -1878,6 +1879,11 @@ footer.site-footer {
   display: inline-block;
   white-space: nowrap;
   transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.3s ease;
+}
+
+.play-swap.is-smooth .play-swap-a,
+.play-swap.is-smooth .play-swap-b {
+  pointer-events: none;
 }
 
 .play-swap.is-smooth .play-swap-b {
@@ -4961,4 +4967,42 @@ footer.site-footer {
   .landing-body--ct {
     padding-bottom: 48px;
   }
+}
+
+/* Play pages: reading text in Helvetica Neue Light, like Work and About; mono stays for labels, nav, tags and captions */
+.play-intro,
+.play-entry-title,
+.lamma-text p,
+.lamma-place p,
+.lamma-pass-text p,
+.lamma-yinyang p,
+.cd-body p,
+.hod-body p,
+.sb-body p,
+.sb-materials li,
+.sb-hover-list {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 25px;
+}
+
+.lamma-text p strong,
+.cd-title,
+.hod-title,
+.sb-title {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 35px;
+}
+
+.lamma-text p:has(> strong:only-child) {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 35px;
+}
+
+.sb-title {
+  line-height: normal;
 }
