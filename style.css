@@ -5006,3 +5006,15 @@ footer.site-footer {
 .sb-title {
   line-height: normal;
 }
+
+/* Photo captions on the essay and photo pages match the reading text */
+.lamma figcaption,
+.lamma-nowrap,
+.lamma-willow-caption,
+.lamma-rep-caption,
+.hod-photos figcaption {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 25px;
+}
